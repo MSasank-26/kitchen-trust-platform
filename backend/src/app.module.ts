@@ -11,6 +11,7 @@ import { KitchensModule } from './modules/kitchens/kitchens.module';
 import { AuditsModule } from './modules/audits/audits.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -22,5 +23,6 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
     AuditsModule,
     AnalyticsModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
