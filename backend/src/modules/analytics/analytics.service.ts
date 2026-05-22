@@ -55,4 +55,32 @@ export class AnalyticsService {
       prediction: response.data,
     };
   }
+
+  async generateKitchenInsight(
+    kitchenId: string,
+  ) {
+    const kitchen =
+      await this.prisma.kitchen.findUnique({
+        where: { id: kitchenId },
+      });
+
+    if (!kitchen) {
+      throw new Error(
+        'Kitchen not found',
+      );
+    }
+
+    const response = await axios.post(
+      'http://localhost:8000/generate-insight',
+      {
+        hygieneScore:
+          kitchen.hygieneScore,
+
+        trustScore:
+          kitchen.trustScore,
+      },
+    );
+
+    return response.data;
+  }
 }

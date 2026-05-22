@@ -26,4 +26,14 @@ export class AnalyticsController {
       kitchenId,
     );
   }
+
+  @Get('insight/:kitchenId')
+  generateKitchenInsight(
+    @Param('kitchenId')
+    kitchenId: string,
+  ) {
+    return this.analyticsService.generateKitchenInsight(
+      kitchenId,
+    );
+  }
 }
