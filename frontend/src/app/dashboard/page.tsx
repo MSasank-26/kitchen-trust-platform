@@ -2,6 +2,7 @@
 
 import { useAuthStore } from '@/store/auth.store';
 import TrustAnalytics from '@/components/TrustAnalytics';
+import KitchenRiskCard from '@/components/KitchenRiskCard';
 export default function DashboardPage() {
   const { user } = useAuthStore();
 
@@ -50,6 +51,11 @@ export default function DashboardPage() {
 
       <div className="mt-10">
         <TrustAnalytics />
+          <div className="mt-10">
+           <KitchenRiskCard
+                kitchenId="18228549-3be0-49ec-9c37-7dda09e2d6b9"
+            />
+          </div>
       </div>
     </main>
   );

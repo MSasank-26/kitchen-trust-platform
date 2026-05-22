@@ -1,4 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+} from '@nestjs/common';
 
 import { AnalyticsService } from './analytics.service';
 
@@ -11,5 +15,15 @@ export class AnalyticsController {
   @Get('trust')
   getTrustAnalytics() {
     return this.analyticsService.getTrustAnalytics();
+  }
+
+  @Get('ai-risk/:kitchenId')
+  getKitchenRiskPrediction(
+    @Param('kitchenId')
+    kitchenId: string,
+  ) {
+    return this.analyticsService.getKitchenRiskPrediction(
+      kitchenId,
+    );
   }
 }
