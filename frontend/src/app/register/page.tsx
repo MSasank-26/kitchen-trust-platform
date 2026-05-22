@@ -2,50 +2,38 @@
 
 import { useForm } from 'react-hook-form';
 
-import { useRouter } from 'next/navigation';
-
 import { api } from '@/lib/api';
 
-import { useAuthStore } from '@/store/auth.store';
-
-type LoginForm = {
+type RegisterForm = {
   email: string;
   password: string;
 };
 
-export default function LoginPage() {
-  const router = useRouter();
-
-  const setAuth =
-    useAuthStore(
-      (state) => state.setAuth,
-    );
-
+export default function RegisterPage() {
   const {
     register,
     handleSubmit,
-  } = useForm<LoginForm>();
+  } = useForm<RegisterForm>();
 
   const onSubmit = async (
-    data: LoginForm,
+    data: RegisterForm,
   ) => {
     try {
-      const response =
-        await api.post(
-          '/auth/login',
-          data,
-        );
-
-      setAuth(
-        response.data.access_token,
-        response.data.user,
+      await api.post(
+        '/auth/register',
+        {
+          ...data,
+          role: 'OWNER',
+        },
       );
 
-      router.push('/dashboard');
+      alert(
+        'Registration successful',
+      );
     } catch (error) {
       console.error(error);
 
-      alert('Login failed');
+      alert('Registration failed');
     }
   };
 
@@ -56,7 +44,7 @@ export default function LoginPage() {
         className="bg-zinc-900 p-10 rounded-2xl w-full max-w-md space-y-6"
       >
         <h1 className="text-4xl font-bold">
-          Login
+          Register
         </h1>
 
         <input
@@ -77,7 +65,7 @@ export default function LoginPage() {
           type="submit"
           className="w-full bg-white text-black p-4 rounded-lg font-bold"
         >
-          Login
+          Create Account
         </button>
       </form>
     </main>
